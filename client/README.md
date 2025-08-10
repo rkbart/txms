@@ -1,70 +1,143 @@
-# Getting Started with Create React App
+# Transaction Management System
+A simple transaction management system with a Rails API backend and React frontend for displaying and managing transactions stored in a CSV file.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Features
+**Backend API:** Rails application with endpoints to retrieve and add transactions
 
-## Available Scripts
+**Frontend UI:** React application with a transaction table and add transaction modal
 
-In the project directory, you can run:
+**Data Storage:** CSV file-based storage
 
-### `npm start`
+**Status Management:** Transactions with Pending (Yellow), Settled (Green), and Failed (Red) statuses
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Prerequisites
+Before running this application, you need to install the following software:
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Recommended Code Editor
+**Visual Studio Code** (optional but recommended for viewing/editing code)
 
-### `npm run build`
+- Download and install from: https://code.visualstudio.com/
+- Free, cross-platform code editor with excellent support for JavaScript, Ruby, and many other languages
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Required Software
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Ruby** (version 3.0 or higher)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Download and install from: https://rubyinstaller.org/ (Windows) or https://www.ruby-lang.org/en/downloads/
+- Verify installation: ``ruby --version``
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Rails** (Ruby on Rails framework)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Install after Ruby is installed: ``gem install rails``
+- Verify installation: ``rails --version``
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Node.js and npm** (Node.js 16 or higher)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Download and install from: https://nodejs.org/ (choose LTS version)
+- Verify installation: ``node --version`` and ``npm --version``
 
-## Learn More
+**Git** (for cloning the repository)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Download and install from: https://git-scm.com/downloads
+- Verify installation: ``git --version``
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Note:** For detailed installation instructions for your operating system, refer to the official documentation links above.
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Getting Started
+## Step 1: Clone the Repository
 
-### Analyzing the Bundle Size
+Open your Git Bash terminal/command prompt and run:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  *Clone the repository:*
 
-### Making a Progressive Web App
+    git clone https://github.com/rkbart/transaction-management-system.git
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  *Navigate to the project directory:*
 
-### Advanced Configuration
+    cd transaction-management-system
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Step 2: Set Up the Rails Backend
 
-### Deployment
+**1. Navigate to the project root (if not already there):**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+    cd transaction-management-system
 
-### `npm run build` fails to minify
+**2. Install Bundler (Ruby package manager):**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    gem install bundler
+
+**3. Install Ruby dependencies:**
+
+    bundle install
+
+**Note:** This command reads the Gemfile and installs all required Ruby gems (libraries).
+
+**4. Start the Rails server:**
+  
+    rails server
+
+*The Rails backend will now be running on http://localhost:3000*
+
+*Keep this terminal window open - the Rails server needs to keep running.*
+
+## Step 3: Set Up the React Frontend
+
+**1. Open a new terminal/command prompt window** (keep the Rails server running in the first one)
+
+**2. Navigate to the React app directory:**
+
+    cd transaction-management-system/client
+    
+*Note: Adjust the path if your React app is in a different directory*
+
+**3. Install Node.js dependencies:**
+    
+    npm install
+
+*Note: This command reads package.json and installs all required JavaScript libraries.*
+
+**4. Start the React development server:**
+    
+    npm start
+
+*The React frontend will now be running on http://localhost:3001 (or another port if 3001 is occupied)*
+
+
+# Accessing the Application
+
+Once both servers are running:
+
+**1. Frontend (React App):** Open your web browser and go to http://localhost:3001
+
+**2. Backend API:** The Rails API is available at http://localhost:3000 (but no need to open it in the browser)
+
+
+# Using the Application
+
+**1. View Transactions:** The main page displays all transactions in a table format
+
+**2. Add Transaction:** Click the "Add Transaction" button to open a modal form
+
+**3. Fill Form:** Enter transaction details (date, account number, account holder name, amount)
+
+**4. Submit:** The transaction will be saved and the table will update automatically
+
+
+# Stopping the Application
+
+To stop the servers:
+
+**Stop React server:** In the React terminal, press Ctrl + C (or Cmd + C on Mac)
+
+**Stop Rails server:** In the Rails terminal, press Ctrl + C (or Cmd + C on Mac)
+
+
+# Development Notes
+
+- The CSV file is located in storage/transactions.csv
+- Transaction status is randomized when adding new transactions
+- No authentication is required as per the requirements

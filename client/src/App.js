@@ -35,12 +35,15 @@ function App() {
   const handleSubmitTransaction = async (e) => {
     e.preventDefault();
 
+    const status = ["Pending", "Settled", "Failed"];
+    const randomStatus = status[Math.floor(Math.random() * status.length)];
+
     const newTransaction = {
       "Transaction Date": transactionDate,
       "Account Number": accountNumber,
       "Account Holder Name": name,
       Amount: amount,
-      Status: "Pending",
+      Status: randomStatus,
     };
 
     try {
