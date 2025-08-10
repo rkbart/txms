@@ -37,7 +37,7 @@ function TarnsactionModal({
           />
           <input
             type="text"
-            placeholder="Account Number"
+            placeholder="16 Digit Account Number"
             maxLength="14"
             value={accountNumber}
             onChange={(e) => {
