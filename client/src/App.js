@@ -72,7 +72,7 @@ function App() {
     return (
       <div className="flex flex-col items-center justify-center h-screen bg-cream-500">
         <h1 className="text-3xl font-bold text-darkgreen-500 mb-6">
-          Transaction Mangement System
+          Transaction Management System
         </h1>
         <button
           onClick={() => setShowTransactions(true)}
