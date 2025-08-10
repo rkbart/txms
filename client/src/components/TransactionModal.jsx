@@ -74,7 +74,7 @@ function TarnsactionModal({
             placeholder="Amount"
             className="w-full border border-gray-300 rounded-md p-2 text-sm"
             min="1"
-            max="10000"
+            max="999999"
             value={amount}
             onChange={(e) => {
               const amountValue = e.target.value.replace(/\D/g, "");
