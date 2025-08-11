@@ -18,9 +18,20 @@ class TransactionValidator
   private
 
   def validate_presence
-    %w[Transaction\ Date Account\ Number Account\ Holder\ Name Amount Status].each do |field|
+    required_fields = [
+      "Transaction Date",
+      "Account Number",
+      "Account Holder Name",
+      "Amount",
+      "Status"
+    ]
+
+    required_fields.each do |field|
       value = @transaction[field]
-      errors << "#{field} is required" if value.nil? || value.strip.empty?
+
+      if value.nil? || value.strip.empty?
+        errors << "#{field} is required"
+      end
     end
   end
 
