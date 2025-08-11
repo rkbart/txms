@@ -1,0 +1,37 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: txms_backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/txms
+    working_dir: /txms
+    tty: true
+    stdin_open: true
+    environment:
+      RAILS_ENV: development
+    depends_on: []
+    command: bash -c "bundle install && rails server -b 0.0.0.0 -p 3000"
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: txms_frontend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    working_dir: /app
+    tty: true
+    stdin_open: true
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
+    depends_on:
+      - backend
+    command: npm start
