@@ -1,0 +1,53 @@
+# =====================
+# FRONTEND BUILD STAGE
+# =====================
+FROM node:20-alpine AS frontend
+
+WORKDIR /app
+
+# Install dependencies first (better caching)
+COPY client/package.json client/package-lock.json ./
+RUN npm ci --legacy-peer-deps
+
+# Copy source code and build
+COPY client/ ./
+RUN npm run build
+
+# =====================
+# BACKEND BUILD STAGE
+# =====================
+FROM ruby:3.4.1-slim AS backend
+
+# Install OS dependencies
+RUN apt-get update -qq && \
+  apt-get install --no-install-recommends -y \
+  build-essential \
+  libjemalloc2 \
+  libvips \
+  sqlite3 \
+  curl \
+  git && \
+  rm -rf /var/lib/apt/lists/*
+
+WORKDIR /txms
+
+# Install Ruby gems
+COPY Gemfile Gemfile.lock ./
+RUN gem install bundler && bundle install --without development test
+
+# Copy Rails app
+COPY . .
+
+# Copy frontend build into Rails public directory
+COPY --from=frontend /app/build ./public
+
+# Environment variables
+ENV RAILS_ENV=production \
+  RACK_ENV=production
+
+# No assets:precompile — not needed for API + separate frontend
+# RUN bundle exec rails assets:precompile
+
+# Entrypoint and default command
+ENTRYPOINT ["./entrypoint.sh"]
+CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]
