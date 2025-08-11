@@ -44,6 +44,6 @@ class TransactionValidator
 
   def validate_amount
     amount = @transaction["Amount"].to_f
-    errors << "Amount must be between 1 and 10,000" unless amount > 0 && amount <= 10_000
+    errors << "Amount must be between 1 and 99,999" unless amount > 0 && amount <= 99_999
   end
 end
