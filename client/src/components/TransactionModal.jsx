@@ -74,11 +74,11 @@ function TarnsactionModal({
             placeholder="Amount"
             className="w-full border border-gray-300 rounded-md p-2 text-sm"
             min="1"
-            max="999999"
+            max="99999"
             value={amount}
             onChange={(e) => {
               const amountValue = e.target.value.replace(/\D/g, "");
-              if (amountValue.length <= 7) setAmount(amountValue);
+              if (amountValue.length <= 5) setAmount(amountValue);
             }}
             required
           />
